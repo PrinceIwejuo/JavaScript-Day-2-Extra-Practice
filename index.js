@@ -1,4 +1,4 @@
-// Use Array Methods to solve the tasks below 🎉
+ // Use Array Methods to solve the tasks below 🎉
 
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
 
@@ -7,6 +7,9 @@ TASK 1 🚀
 // The customer would like to see the topping options, console log out each of the toppings one by one in the array above 
 */
 
+toppings.forEach(function(item){
+    console.log(item);
+});
 
 /*
 TASK 2 🚀
@@ -15,13 +18,26 @@ for example you no longer have any onions and need to remove it from the list of
 Use .forEach() - hint - you will need to include the index in the callback
  */
 
+ newArr = []
+
+function removeToppings(array, topping){
+array.forEach((item, index)=>{
+    if(topping == item){
+    return array.splice(index, 1);
+   }
+});
+ return array   
+};
+console.log(removeToppings(toppings,'Onions'));
 
 
 /*
 TASK 3 🚀
 // Sort the topping alphabetically and return them in a new array 
 */
+toppings.sort()
 
+console.log(toppings.sort);
 
 
 
@@ -43,6 +59,11 @@ TASK 4 🚀
 // The travel agent would like to send a couple on their honeymoon to a location with a beach and a temperature above 90 degrees. return their options in a new array 
 */
 
+const honeymoon = vacations.filter(function(item){
+    return item.temperature > 90 && item.beach === true;
+});
+
+console.log(honeymoon);
 
 
 /*
@@ -50,13 +71,45 @@ TASK 5 🚀
 // A developer decides to become a digital nomad for a year, they would like to live in a place with strong wifi, a beach, and good hiking, return their options
 */
 
-
+let ak = vacations.filter(function(item){
+    if(item.wifi == 'strong' && item.hiking == true && item.beach == true){
+        return item;
+    }
+    
+   
+});
+console.log(ak);
 
 /* 
 TASK 6 🚀
 // write a function that allows a user to sort their vacations by hiking opportunities, beach access or a mix of both and return their options
 */
+const hike = vacations.filter(function(item){
+    return item.hiking == true;
+});
+console.log(hike);
 
+const beaches = vacations.filter(function(item){
+    return item.beach == true;
+});
+console.log(beaches);
+
+const hikeBeach = vacations.filter(function(item){
+    return item.hiking == true && item.beach == true;
+});
+
+function perfectVaca (goal){
+    if (goal == 'hiking'){
+        return hike;
+    }else if (goal == 'beach'){
+        return beaches;
+    }else if (goal == 'both'){
+        return hikeBeach;
+    }else{
+        'sorry cant help ya;'
+    }
+}
+console.log(perfectVaca('beach'));
 
 
 /* 
@@ -65,6 +118,13 @@ TASK 7 🚀
 hint - use .reduce()
 */
 
+const averageOverallRating = vacations.reduce(function(accumulator, item){
+    console.log(`i am the accumulator ${accumulator}`);
+    console.log(`i am the current value ${item.overall_rating}`)
+    return accumulator + item.overall_rating / item.overall_rating;
+},0);
+
+console.log(`the average overall rating is ${averageOverallRating}`);
 
 /*
 TASK 8 🚀
@@ -72,3 +132,10 @@ Find the airport codes for each of the cities in the vacation array and write a 
 hint - your function should include array, index and code as parameters
 you will need to invoke the function each time you wish to add a new code
 */
+
+function findCode(array, index, code){
+     let riv = array[index]
+     riv.push({airportCodes:code})
+    return riv;
+}
+console.log(findCode(vacations, 1, 'MIA'));
